@@ -7,11 +7,13 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const ADMIN_PIN = process.env.ADMIN_PIN || 'ady2026';
 
-// Paths
+// Environment & Paths
+const isVercel = Boolean(process.env.VERCEL);
 const DATA_DIR = path.join(__dirname, 'data');
+const TMP_DATA_DIR = isVercel ? path.join('/tmp', 'data') : DATA_DIR;
 const BRANDS_FILE = path.join(DATA_DIR, 'brands.json');
-const RESPONSES_FILE = path.join(DATA_DIR, 'responses.json');
-const SETTINGS_FILE = path.join(DATA_DIR, 'settings.json');
+const RESPONSES_FILE = path.join(TMP_DATA_DIR, 'responses.json');
+const SETTINGS_FILE = path.join(TMP_DATA_DIR, 'settings.json');
 
 // Middleware
 app.use(cors());
@@ -19,15 +21,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Ensure data folder and files exist
-if (!fs.existsSync(DATA_DIR)) {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
-}
-if (!fs.existsSync(RESPONSES_FILE)) {
-  fs.writeFileSync(RESPONSES_FILE, '[]', 'utf8');
-}
-if (!fs.existsSync(SETTINGS_FILE)) {
-  fs.writeFileSync(SETTINGS_FILE, JSON.stringify({ googleSheetWebhook: '' }, null, 2), 'utf8');
+// Ensure data folder and files exist safely
+try {
+  if (!fs.existsSync(TMP_DATA_DIR)) {
+    fs.mkdirSync(TMP_DATA_DIR, { recursive: true });
+  }
+  if (!fs.existsSync(RESPONSES_FILE)) {
+    fs.writeFileSync(RESPONSES_FILE, '[]', 'utf8');
+  }
+  if (!fs.existsSync(SETTINGS_FILE)) {
+    fs.writeFileSync(SETTINGS_FILE, JSON.stringify({ googleSheetWebhook: '' }, null, 2), 'utf8');
+  }
+} catch (err) {
+  console.warn('Filesystem init notice:', err.message);
 }
 
 // Helpers
@@ -324,7 +330,14 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.listen(PORT, () => {
-  console.log(`✨ ADY SELECT Demand Assessment Server running at: http://localhost:${PORT}`);
-  console.log(`📊 Admin Portal available at: http://localhost:${PORT}/admin (PIN: ${ADMIN_PIN})`);
-});
+// Start server locally (if not running in Vercel serverless)
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`✨ ADY SELECT Demand Assessment Server running at: http://localhost:${PORT}`);
+    console.log(`📊 Admin Portal available at: http://localhost:${PORT}/admin (PIN: ${ADMIN_PIN})`);
+  });
+}
+
+// Export Express app for Vercel Serverless Function
+module.exports = app;
+
