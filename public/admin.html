@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADY SELECT | Store Demand Analytics &amp; Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- PIN Protection Modal / Gate -->
+  <div class="pin-gate-modal" id="pinGateModal">
+    <div class="pin-card">
+      <img src="logo.png" alt="ADY SELECT" class="admin-pin-logo">
+      <div class="pin-brand-title">ADY SELECT</div>
+      <div class="pin-sub">Store Analytics &amp; Spreadsheet Export</div>
+      <p class="pin-instruction">Please enter your private Store Admin PIN to view demand results:</p>
+      
+      <form id="pinForm">
+        <div class="pin-input-group">
+          <input type="password" id="adminPinInput" placeholder="Enter PIN (Default: ady2026)" autocomplete="current-password" autofocus>
+          <button type="submit" class="btn-pin-submit">Unlock</button>
+        </div>
+        <div class="pin-error" id="pinError" style="display: none;">Incorrect PIN. Please try again.</div>
+      </form>
+      <div class="pin-hint">Default Admin PIN: <code>ady2026</code></div>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard Container -->
+  <div class="admin-wrapper" id="adminContent" style="display: none;">
+    <!-- Top Header -->
+    <header class="admin-header">
+      <div class="admin-brand-info">
+        <div class="header-logo-row">
+          <img src="logo.png" alt="ADY SELECT" class="header-admin-logo">
+          <div>
+            <h1>ADY SELECT <span>DEMAND DASHBOARD</span></h1>
+            <p>USA &amp; Canada Curated Portfolio Demand Assessment</p>
+          </div>
+        </div>
+      </div>
+      <div class="admin-top-actions">
+        <a href="/" target="_blank" class="btn-link">View Public Form ↗</a>
+        <button type="button" class="btn-primary-action btn-excel" id="exportCsvBtn">
+          Download Excel / CSV
+        </button>
+        <button type="button" class="btn-logout" id="logoutBtn">Lock</button>
+      </div>
+    </header>
+
+    <!-- KPI Metric Cards -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-icon-box">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        </div>
+        <div class="metric-data">
+          <div class="metric-number" id="metricTotalResponses">0</div>
+          <div class="metric-label">Total Respondents</div>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon-box">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <div class="metric-data">
+          <div class="metric-number" id="metricTotalVotes">0</div>
+          <div class="metric-label">Total Brand Votes</div>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon-box">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        </div>
+        <div class="metric-data">
+          <div class="metric-number" id="metricVipLeads">0</div>
+          <div class="metric-label">VIP Buyer Leads</div>
+        </div>
+      </div>
+      <div class="metric-card highlight">
+        <div class="metric-icon-box">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        </div>
+        <div class="metric-data">
+          <div class="metric-number" id="metricTopBrand">—</div>
+          <div class="metric-label">#1 Most Demanded Brand</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Analytics Content -->
+    <div class="dashboard-grid">
+      
+      <!-- Left Column: Top Demanded Brands -->
+      <section class="dashboard-card main-ranking-card">
+        <div class="card-header-row">
+          <div>
+            <h2>Top Demanded Brands</h2>
+            <p class="card-subtext">Ranked by customer votes &amp; purchase intent</p>
+          </div>
+          <button type="button" class="btn-sm-action" id="copySummaryBtn">
+            Copy Top 10 Summary
+          </button>
+        </div>
+
+        <div class="rankings-list" id="rankingsContainer">
+          <div class="empty-state">No survey votes recorded yet. Share your link to start collecting votes!</div>
+        </div>
+      </section>
+
+      <!-- Right Column: Category Distribution & Special Requests -->
+      <div class="dashboard-side-col">
+        <!-- Category Breakdown -->
+        <section class="dashboard-card">
+          <h2>Demand By Category</h2>
+          <p class="card-subtext">Where shoppers want you to spend inventory capacity</p>
+          <div class="category-bars" id="categoryBarsContainer">
+            <!-- Dynamically populated -->
+          </div>
+        </section>
+
+        <!-- Specific Customer Wishlists -->
+        <section class="dashboard-card">
+          <h2>Specific Product Requests</h2>
+          <p class="card-subtext">Individual products or shades shoppers asked for</p>
+          <div class="requests-list" id="requestsContainer">
+            <!-- Dynamically populated -->
+          </div>
+        </section>
+      </div>
+
+    </div>
+
+    <!-- Submissions Table Section -->
+    <section class="dashboard-card full-table-card">
+      <div class="card-header-row">
+        <div>
+          <h2>Individual Customer Responses</h2>
+          <p class="card-subtext">Log of everyone who submitted &amp; their contact info</p>
+        </div>
+        <div class="table-search-box">
+          <input type="text" id="tableSearchInput" placeholder="Filter by name, brand, contact...">
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="data-table" id="responsesTable">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Customer / Contact</th>
+              <th>Brands Selected</th>
+              <th>Specific Wishlist</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="responsesTableBody">
+            <tr>
+              <td colspan="5" class="table-empty">No responses recorded yet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "ady-select-demand-app",
+  "version": "1.0.0",
+  "description": "Customer Demand Assessment & VIP Wishlist App for ADY SELECT (USA & Canada)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": ["ady-select", "demand-assessment", "survey", "brand-portfolio"],
+  "author": "ADY SELECT",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "cors": "^2.8.5"
+  }
+}

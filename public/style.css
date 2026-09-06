@@ -1,0 +1,913 @@
+/* ==========================================================
+   ADY SELECT — CURATED ONLINE BEAUTY & LIFESTYLE STORE
+   Design: Editorial Terracotta, Rose Gold & Clean Obsidian
+   ========================================================== */
+
+:root {
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --bg-page: #FAF7F4;
+  --bg-card: #FFFFFF;
+  --bg-warm-tint: #F7EFEB;
+  --bg-terracotta-light: #F4E8E3;
+
+  --color-terracotta: #B86A50;
+  --color-terracotta-hover: #A35A42;
+  --color-terracotta-dark: #8F4C35;
+  --color-gold: #C5A059;
+  --color-obsidian: #181615;
+  --color-charcoal: #363230;
+  --color-muted: #7D7571;
+  --color-border: #E8DCD5;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-full: 9999px;
+
+  --shadow-subtle: 0 4px 16px rgba(24, 22, 21, 0.04);
+  --shadow-card: 0 8px 24px rgba(24, 22, 21, 0.06);
+  --shadow-elevated: 0 16px 36px rgba(184, 106, 80, 0.12);
+
+  --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-page);
+  color: var(--color-obsidian);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Background Atmosphere & Scattered Floating Collage */
+.bg-decorations {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  min-height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-blur-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+}
+
+.circle-1 {
+  width: 450px;
+  height: 450px;
+  background: #EED8CF;
+  top: -100px;
+  right: -100px;
+}
+
+.circle-2 {
+  width: 500px;
+  height: 500px;
+  background: #F3E4DC;
+  bottom: 50px;
+  left: -150px;
+}
+
+/* ---------------- Top Sticky Animated Luxury Shopping Scene ---------------- */
+.top-cart-track {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 68px;
+  background: rgba(250, 247, 244, 0.88);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  border-bottom: 1.5px solid rgba(184, 106, 80, 0.22);
+  box-shadow: 0 4px 20px rgba(24, 22, 21, 0.06);
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.cart-runner {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: strollCartTrack 16s linear infinite;
+  white-space: nowrap;
+}
+
+@keyframes strollCartTrack {
+  0% { transform: translateX(-180px); }
+  100% { transform: translateX(calc(100vw + 40px)); }
+}
+
+.cart-speech-bubble {
+  background: var(--color-obsidian);
+  color: #FAF7F4;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+.cart-speech-bubble::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 5px 0 5px 6px;
+  border-style: solid;
+  border-color: transparent transparent transparent var(--color-obsidian);
+}
+
+.cart-svg-scene {
+  width: 140px;
+  height: 65px;
+}
+
+.cart-wheel-spinner {
+  transform-origin: center;
+  animation: spinWheel 1s linear infinite;
+}
+
+@keyframes spinWheel {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.girl-group {
+  animation: walkBounce 0.45s ease-in-out infinite alternate;
+}
+
+@keyframes walkBounce {
+  from { transform: translateY(0px); }
+  to { transform: translateY(-2px); }
+}
+
+/* ---------------- Scattered Editorial Product Cards (Edges & Middle) ---------------- */
+.bg-scatter-item {
+  position: absolute;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(24, 22, 21, 0.18);
+  border: 3.5px solid rgba(255, 255, 255, 0.95);
+  opacity: 0.92;
+  pointer-events: none;
+  background: #FFFFFF;
+}
+
+.bg-scatter-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 1. Skincare Serums (Top Left Side) */
+.scatter-1 {
+  width: 440px;
+  height: 270px;
+  top: 30px;
+  left: -110px;
+  transform: rotate(-11deg);
+  animation: floatScatter1 10s ease-in-out infinite alternate;
+}
+
+/* 2. Fragrance & Perfumes (Top Right Side) */
+.scatter-2 {
+  width: 450px;
+  height: 275px;
+  top: 70px;
+  right: -120px;
+  transform: rotate(13deg);
+  animation: floatScatter2 11s ease-in-out infinite alternate;
+}
+
+/* 3. Eyeshadow Palette & Brushes (Upper Left Side) */
+.scatter-3 {
+  width: 440px;
+  height: 270px;
+  top: 350px;
+  left: -100px;
+  transform: rotate(10deg);
+  animation: floatScatter2 9s ease-in-out infinite alternate;
+}
+
+/* 4. Cosmetics & Arches (Upper Right Side) */
+.scatter-4 {
+  width: 450px;
+  height: 280px;
+  top: 390px;
+  right: -110px;
+  transform: rotate(-12deg);
+  animation: floatScatter1 12s ease-in-out infinite alternate;
+}
+
+/* 5. Makeup & Beauty (IN THE MIDDLE - peeking through frosted glass!) */
+.scatter-middle-1 {
+  width: 480px;
+  height: 300px;
+  top: 560px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-4deg);
+  opacity: 0.88;
+  animation: floatScatterCenter 9s ease-in-out infinite alternate;
+}
+
+/* 6. Haircare & Body Care (Mid Right Side) */
+.scatter-5 {
+  width: 460px;
+  height: 290px;
+  top: 780px;
+  right: -90px;
+  transform: rotate(9deg);
+  animation: floatScatter1 11s ease-in-out infinite alternate;
+}
+
+/* 7. Lipsticks Array (Mid Left Side) */
+.scatter-6 {
+  width: 440px;
+  height: 270px;
+  top: 860px;
+  left: -90px;
+  transform: rotate(-10deg);
+  animation: floatScatter2 10s ease-in-out infinite alternate;
+}
+
+/* 8. Silk Loungewear & Intimates (IN THE MIDDLE-LEFT - peeking through frosted glass!) */
+.scatter-middle-2 {
+  width: 460px;
+  height: 295px;
+  top: 1100px;
+  left: 14%;
+  transform: rotate(-6deg);
+  opacity: 0.88;
+  animation: floatScatter1 12s ease-in-out infinite alternate;
+}
+
+/* 9. Silk Camisole & Lace (Lower Right Side) */
+.scatter-7 {
+  width: 440px;
+  height: 275px;
+  top: 1220px;
+  right: -80px;
+  transform: rotate(11deg);
+  animation: floatScatter2 11s ease-in-out infinite alternate;
+}
+
+/* 10. Men's Essentials & Basics (Bottom Left Side) */
+.scatter-8 {
+  width: 450px;
+  height: 280px;
+  top: 1460px;
+  left: -70px;
+  transform: rotate(-8deg);
+  animation: floatScatter1 10s ease-in-out infinite alternate;
+}
+
+@keyframes floatScatter1 {
+  0% { transform: translateY(0px) rotate(var(--base-rot, -10deg)); }
+  100% { transform: translateY(-16px) rotate(calc(var(--base-rot, -10deg) + 2deg)); }
+}
+
+@keyframes floatScatter2 {
+  0% { transform: translateY(0px) rotate(var(--base-rot, 10deg)); }
+  100% { transform: translateY(-14px) rotate(calc(var(--base-rot, 10deg) - 2deg)); }
+}
+
+@keyframes floatScatterCenter {
+  0% { transform: translateX(-50%) translateY(0px) rotate(-4deg); }
+  100% { transform: translateX(-50%) translateY(-14px) rotate(-2deg); }
+}
+
+.main-wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 30px 20px 60px;
+  width: 100%;
+  flex: 1;
+}
+
+/* ---------------- Brand Hero Header (Transparent Frosted Glass) ---------------- */
+.brand-hero {
+  text-align: center;
+  padding: 36px 20px 30px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 16px 40px rgba(24, 22, 21, 0.07);
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.brand-logo-img {
+  height: 84px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.04));
+}
+
+.brand-name {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: 6px;
+  color: var(--color-obsidian);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.brand-origin {
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 3.5px;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.brand-separator {
+  width: 50px;
+  height: 1.5px;
+  background: var(--color-terracotta);
+  margin: 0 auto 16px;
+}
+
+.brand-statement {
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--color-charcoal);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.brand-signature {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--color-terracotta);
+  margin-bottom: 16px;
+}
+
+/* Terracotta Dots Palette */
+.terracotta-swatches {
+  display: inline-flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.swatch.s1 { background: #D98880; }
+.swatch.s2 { background: #C27B62; }
+.swatch.s3 { background: #B86A50; }
+.swatch.s4 { background: #A35A42; }
+.swatch.s5 { background: #8F4C35; }
+
+/* ---------------- Voting Section (Transparent Frosted Glass) ---------------- */
+.voting-container {
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  box-shadow: 0 20px 48px rgba(24, 22, 21, 0.08);
+  margin-bottom: 30px;
+}
+
+.voting-intro {
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.voting-intro h2 {
+  font-family: var(--font-serif);
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--color-obsidian);
+  margin-bottom: 4px;
+}
+
+.voting-intro p {
+  font-size: 0.88rem;
+  color: var(--color-muted);
+}
+
+/* Controls Bar (Search + Category Tabs) */
+.controls-bar {
+  margin-bottom: 24px;
+}
+
+.search-box {
+  position: relative;
+  margin-bottom: 14px;
+}
+
+.search-svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: var(--color-muted);
+  pointer-events: none;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 12px 38px 12px 42px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-border);
+  background: var(--bg-warm-tint);
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  outline: none;
+  color: var(--color-obsidian);
+  transition: var(--transition);
+}
+
+.search-box input:focus {
+  border-color: var(--color-terracotta);
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(184, 106, 80, 0.12);
+}
+
+.btn-clear-search {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--color-muted);
+  cursor: pointer;
+  padding: 4px;
+}
+
+.category-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+
+.category-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.cat-tab {
+  background: var(--bg-warm-tint);
+  border: 1px solid var(--color-border);
+  color: var(--color-charcoal);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+.cat-tab:hover {
+  border-color: var(--color-terracotta);
+  color: var(--color-terracotta);
+}
+
+.cat-tab.active {
+  background: var(--color-obsidian);
+  color: #FFFFFF;
+  border-color: var(--color-obsidian);
+}
+
+/* ---------------- Brand Grid & Luxury Chips ---------------- */
+.brand-catalog-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+  min-height: 180px;
+}
+
+.brand-card-pill {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(232, 220, 213, 0.85);
+  border-radius: var(--radius-full);
+  padding: 9px 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--color-obsidian);
+  transition: var(--transition);
+  user-select: none;
+}
+
+.brand-card-pill:hover {
+  border-color: var(--color-terracotta);
+  background: rgba(255, 255, 255, 0.95);
+  transform: translateY(-1px);
+}
+
+.brand-card-pill.selected {
+  background: var(--color-obsidian);
+  color: #FFFFFF;
+  border-color: var(--color-obsidian);
+  box-shadow: 0 4px 12px rgba(24, 22, 21, 0.18);
+}
+
+.pill-check-icon {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  color: transparent;
+}
+
+.brand-card-pill.selected .pill-check-icon {
+  background: var(--color-terracotta);
+  border-color: var(--color-terracotta);
+  color: #FFFFFF;
+}
+
+.pill-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  background: rgba(184, 106, 80, 0.12);
+  color: var(--color-terracotta);
+}
+
+.brand-card-pill.selected .pill-badge {
+  background: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+}
+
+/* ---------------- Bottom Checkout / Submit Card ---------------- */
+.checkout-card {
+  background: rgba(247, 239, 235, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(255, 255, 255, 0.75);
+  border-radius: var(--radius-md);
+  padding: 22px;
+}
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.selection-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--color-terracotta);
+}
+
+.selection-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-terracotta);
+}
+
+.btn-clear-all {
+  background: none;
+  border: none;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--color-muted);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.btn-clear-all:hover {
+  color: var(--color-terracotta);
+}
+
+.quick-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.input-field label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-charcoal);
+  margin-bottom: 6px;
+}
+
+.input-field .opt {
+  color: var(--color-muted);
+  font-weight: 400;
+}
+
+.input-field input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-border);
+  background: #FFFFFF;
+  font-family: var(--font-sans);
+  font-size: 0.84rem;
+  color: var(--color-obsidian);
+  outline: none;
+  transition: var(--transition);
+}
+
+.input-field input:focus {
+  border-color: var(--color-terracotta);
+  box-shadow: 0 0 0 3px rgba(184, 106, 80, 0.12);
+}
+
+/* Big Submit Button */
+.btn-submit-wishlist {
+  width: 100%;
+  background: var(--color-obsidian);
+  color: #FFFFFF;
+  border: none;
+  padding: 14px 24px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(24, 22, 21, 0.15);
+}
+
+.btn-submit-wishlist:hover:not(:disabled) {
+  background: #000000;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-elevated);
+}
+
+.btn-submit-wishlist:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-caption {
+  font-size: 0.94rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.btn-subtext {
+  font-size: 0.72rem;
+  opacity: 0.75;
+  font-weight: 400;
+}
+
+/* ---------------- Success Screen ---------------- */
+.success-screen {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.success-card {
+  max-width: 580px;
+  margin: 0 auto;
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 40px 30px;
+  box-shadow: var(--shadow-card);
+}
+
+.success-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.success-logo-img {
+  height: 64px;
+  width: auto;
+}
+
+.success-card h2 {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-obsidian);
+  margin-bottom: 8px;
+}
+
+.success-lead {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.summary-box {
+  background: var(--bg-warm-tint);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.summary-heading {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--color-terracotta);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.summary-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.summary-tag-pill {
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--color-obsidian);
+}
+
+.share-section {
+  border-top: 1px solid var(--color-border);
+  padding-top: 20px;
+  margin-bottom: 24px;
+}
+
+.share-section p {
+  font-size: 0.82rem;
+  color: var(--color-muted);
+  margin-bottom: 12px;
+}
+
+.share-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-share-link {
+  background: var(--bg-warm-tint);
+  border: 1.5px solid var(--color-border);
+  color: var(--color-obsidian);
+  padding: 9px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.btn-share-link:hover {
+  border-color: var(--color-terracotta);
+}
+
+.btn-share-link.whatsapp {
+  background: #25D366;
+  color: #FFFFFF;
+  border-color: #25D366;
+}
+
+.toast-copied {
+  margin-top: 10px;
+  font-size: 0.78rem;
+  color: #2E7D32;
+  font-weight: 600;
+}
+
+.success-footer-note {
+  border-top: 1px solid var(--color-border);
+  padding-top: 18px;
+}
+
+.origin-tag {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--color-muted);
+  margin-top: 6px;
+  letter-spacing: 0.5px;
+}
+
+/* ---------------- Footer ---------------- */
+.site-footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.74rem;
+  color: var(--color-muted);
+}
+
+.site-footer a {
+  color: var(--color-muted);
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  color: var(--color-terracotta);
+}
+
+/* ---------------- Responsive Mobile ---------------- */
+@media (max-width: 680px) {
+  .brand-name {
+    font-size: 1.45rem;
+    letter-spacing: 4px;
+  }
+  .brand-statement {
+    font-size: 0.68rem;
+    letter-spacing: 1.2px;
+  }
+  .mood-banner {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .mood-img-card {
+    height: 120px;
+  }
+  .mood-img-card:not(.center-card) {
+    display: none; /* Keep the center beauty composition on mobile for maximum cleanliness */
+  }
+  .mood-img-card.center-card {
+    height: 140px;
+  }
+  .quick-inputs {
+    grid-template-columns: 1fr;
+  }
+  .voting-container {
+    padding: 20px 16px;
+  }
+}

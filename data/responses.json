@@ -1,0 +1,137 @@
+[
+  {
+    "id": "ADY-MTQBZS9H-WJL",
+    "createdAt": "2026-09-06T21:36:03.797Z",
+    "respondentName": "Jessica M.",
+    "contactInfo": "@jess_beauty",
+    "selectedCategories": [
+      "skincare",
+      "fragrance",
+      "lipcare"
+    ],
+    "selectedBrands": [
+      {
+        "name": "Rare Beauty",
+        "category": "lipcare",
+        "origin": "USA",
+        "priority": true
+      },
+      {
+        "name": "Summer Fridays",
+        "category": "lipcare",
+        "origin": "USA",
+        "priority": true
+      },
+      {
+        "name": "The Ordinary",
+        "category": "skincare",
+        "origin": "Canada",
+        "priority": true
+      },
+      {
+        "name": "CeraVe",
+        "category": "skincare",
+        "origin": "USA",
+        "priority": true
+      },
+      {
+        "name": "Ariana Grande",
+        "category": "fragrance",
+        "origin": "USA",
+        "priority": true
+      },
+      {
+        "name": "Victoria's Secret",
+        "category": "fragrance",
+        "origin": "USA",
+        "priority": true
+      }
+    ],
+    "shoppingFrequency": "Monthly restock",
+    "customRequests": "Summer Fridays Lip Butter Balm in Pink Sugar & Rare Beauty Blush Hope"
+  },
+  {
+    "id": "ADY-MTQBZS9O-YXO",
+    "createdAt": "2026-09-06T21:36:03.804Z",
+    "respondentName": "Maya K.",
+    "contactInfo": "+1 555-234-8901",
+    "selectedCategories": [
+      "womens_essentials",
+      "makeup"
+    ],
+    "selectedBrands": [
+      {
+        "name": "SKIMS",
+        "category": "womens_essentials",
+        "origin": "USA",
+        "priority": true
+      },
+      {
+        "name": "Victoria's Secret",
+        "category": "womens_essentials",
+        "origin": "USA",
+        "priority": true
+      },
+      {
+        "name": "Fenty Beauty",
+        "category": "makeup",
+        "origin": "USA",
+        "priority": true
+      },
+      {
+        "name": "Rare Beauty",
+        "category": "makeup",
+        "origin": "USA",
+        "priority": true
+      }
+    ],
+    "shoppingFrequency": "Every 2-3 months",
+    "customRequests": "SKIMS Fits Everybody bodysuit in Onyx size M"
+  },
+  {
+    "id": "ADY-MTQC1RMS-OC1",
+    "createdAt": "2026-09-06T21:37:36.292Z",
+    "respondentName": "Anonymous VIP",
+    "contactInfo": "N/A",
+    "selectedCategories": [
+      "makeup",
+      "skincare"
+    ],
+    "selectedBrands": [
+      {
+        "name": "Fenty Beauty",
+        "category": "makeup",
+        "origin": "USA",
+        "priority": true
+      }
+    ],
+    "shoppingFrequency": "Every 2-3 months",
+    "customRequests": ""
+  },
+  {
+    "id": "ADY-MTQCWF7E-A5D",
+    "createdAt": "2026-09-06T22:01:26.522Z",
+    "respondentName": "@luxury_shopper",
+    "contactInfo": "@luxury_shopper",
+    "selectedCategories": [
+      "makeup",
+      "womens_essentials"
+    ],
+    "selectedBrands": [
+      {
+        "name": "Rare Beauty",
+        "category": "makeup",
+        "origin": "USA",
+        "priority": true
+      },
+      {
+        "name": "SKIMS",
+        "category": "womens_essentials",
+        "origin": "USA",
+        "priority": true
+      }
+    ],
+    "shoppingFrequency": "Not specified",
+    "customRequests": "Rare Beauty liquid blush & SKIMS soft lounge slip dress"
+  }
+]
