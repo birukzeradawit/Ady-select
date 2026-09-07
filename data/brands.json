@@ -225,5 +225,22 @@
       { "name": "Joe Fresh", "origin": "Canada", "priority": false, "badge": "Canada" },
       { "name": "Knix Sleep", "origin": "Canada", "priority": false, "badge": "Canada" }
     ]
+  },
+  {
+    "id": "kids_baby",
+    "name": "Kids & Baby",
+    "tagline": "Gentle care, soothing essentials & trusted baby products",
+    "brands": [
+      { "name": "Aveeno Baby", "origin": "USA", "priority": true, "badge": "Pediatrician Recommended" },
+      { "name": "Baby Oil", "origin": "USA", "priority": true, "badge": "Essential" },
+      { "name": "Baby Powder", "origin": "USA", "priority": true, "badge": "Classic" },
+      { "name": "Baby Lotion", "origin": "USA", "priority": true, "badge": "Moisturizing" },
+      { "name": "Johnson's Baby", "origin": "USA", "priority": false },
+      { "name": "Cetaphil Baby", "origin": "USA", "priority": false },
+      { "name": "Mustela", "origin": "France", "priority": false },
+      { "name": "Burt's Bees Baby", "origin": "USA", "priority": false },
+      { "name": "Earth Mama", "origin": "USA", "priority": false },
+      { "name": "Babyganics", "origin": "USA", "priority": false }
+    ]
   }
 ]
