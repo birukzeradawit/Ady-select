@@ -119,13 +119,32 @@ app.post('/api/submit', async (req, res) => {
 });
 
 // 3. Admin Authentication & Dashboard Stats
-app.get('/api/admin/stats', (req, res) => {
+app.get('/api/admin/stats', async (req, res) => {
   const pin = req.query.pin || req.headers['x-admin-pin'];
   if (pin !== ADMIN_PIN) {
     return res.status(401).json({ success: false, error: 'Invalid Admin PIN' });
   }
 
-  const responses = readJson(RESPONSES_FILE, []);
+  const settings = readJson(SETTINGS_FILE, { googleSheetWebhook: '' });
+  let responses = [];
+
+  // Try to fetch from Google Sheets if webhook is configured
+  if (settings.googleSheetWebhook) {
+    try {
+      const webhookResponse = await fetch(settings.googleSheetWebhook);
+      const webhookData = await webhookResponse.json();
+      if (webhookData.status === 'success' && webhookData.data) {
+        responses = webhookData.data;
+      }
+    } catch (err) {
+      console.warn('Failed to fetch from Google Sheets, falling back to local storage:', err.message);
+      responses = readJson(RESPONSES_FILE, []);
+    }
+  } else {
+    // Fallback to local storage if no webhook configured
+    responses = readJson(RESPONSES_FILE, []);
+  }
+
   const brandsCatalog = readJson(BRANDS_FILE, []);
 
   // Compute stats
@@ -203,13 +222,31 @@ app.get('/api/admin/stats', (req, res) => {
 });
 
 // 4. Admin Export to CSV / Excel
-app.get('/api/admin/export-csv', (req, res) => {
+app.get('/api/admin/export-csv', async (req, res) => {
   const pin = req.query.pin;
   if (pin !== ADMIN_PIN) {
     return res.status(401).send('Unauthorized. Invalid PIN.');
   }
 
-  const responses = readJson(RESPONSES_FILE, []);
+  const settings = readJson(SETTINGS_FILE, { googleSheetWebhook: '' });
+  let responses = [];
+
+  // Try to fetch from Google Sheets if webhook is configured
+  if (settings.googleSheetWebhook) {
+    try {
+      const webhookResponse = await fetch(settings.googleSheetWebhook);
+      const webhookData = await webhookResponse.json();
+      if (webhookData.status === 'success' && webhookData.data) {
+        responses = webhookData.data;
+      }
+    } catch (err) {
+      console.warn('Failed to fetch from Google Sheets for export, falling back to local storage:', err.message);
+      responses = readJson(RESPONSES_FILE, []);
+    }
+  } else {
+    // Fallback to local storage if no webhook configured
+    responses = readJson(RESPONSES_FILE, []);
+  }
 
   // CSV Headers
   const headers = [
@@ -277,12 +314,32 @@ app.post('/api/admin/settings', (req, res) => {
 });
 
 // 6. Admin Delete Single Response
-app.delete('/api/admin/response/:id', (req, res) => {
+app.delete('/api/admin/response/:id', async (req, res) => {
   const pin = req.query.pin || req.headers['x-admin-pin'];
   if (pin !== ADMIN_PIN) {
     return res.status(401).json({ success: false, error: 'Invalid PIN' });
   }
 
+  const settings = readJson(SETTINGS_FILE, { googleSheetWebhook: '' });
+  
+  // Try to delete from Google Sheets if webhook is configured
+  if (settings.googleSheetWebhook) {
+    try {
+      const deleteUrl = `${settings.googleSheetWebhook}?id=${encodeURIComponent(req.params.id)}`;
+      const webhookResponse = await fetch(deleteUrl, { method: 'DELETE' });
+      const webhookData = await webhookResponse.json();
+      
+      if (webhookData.status === 'success') {
+        return res.json({ success: true, message: 'Response removed from Google Sheets.' });
+      } else {
+        console.warn('Failed to delete from Google Sheets, falling back to local storage:', webhookData.message);
+      }
+    } catch (err) {
+      console.warn('Failed to delete from Google Sheets, falling back to local storage:', err.message);
+    }
+  }
+  
+  // Fallback to local storage
   let responses = readJson(RESPONSES_FILE, []);
   responses = responses.filter(r => r.id !== req.params.id);
   writeJson(RESPONSES_FILE, responses);
